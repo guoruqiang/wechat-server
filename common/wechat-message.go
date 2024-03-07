@@ -36,7 +36,7 @@ func ProcessWeChatMessage(req *WeChatMessageRequest, res *WeChatMessageResponse)
 				res.Content = code
 			}
 		case "subscribe": // 处理关注事件
-			res.Content = "Thank you for subscribing!" // 自动回复的消息内容
+			res.Content = "欢迎关注小锦亿。使用西农er's ChatGPT的小伙伴点击下方的获取验证码即可登录哟，再也不用担心忘记用户名了。有什么问题联系管理员。" // 自动回复的消息内容
 		}
 	} else {
 		switch req.Content {
