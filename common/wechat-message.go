@@ -26,12 +26,17 @@ type WeChatMessageResponse struct {
 }
 
 func ProcessWeChatMessage(req *WeChatMessageRequest, res *WeChatMessageResponse) {
-	if req.MsgType == "event" && req.Event == "CLICK" {
-		switch req.EventKey {
-		case "USER_VERIFICATION":
-			code := GenerateAllNumberVerificationCode(6)
-			RegisterWeChatCodeAndID(code, req.FromUserName)
-			res.Content = code
+	if req.MsgType == "event" {
+		switch req.Event {
+		case "CLICK":
+			switch req.EventKey {
+			case "USER_VERIFICATION":
+				code := GenerateAllNumberVerificationCode(6)
+				RegisterWeChatCodeAndID(code, req.FromUserName)
+				res.Content = code
+			}
+		case "subscribe": // 处理关注事件
+			res.Content = "Thank you for subscribing!" // 自动回复的消息内容
 		}
 	} else {
 		switch req.Content {
